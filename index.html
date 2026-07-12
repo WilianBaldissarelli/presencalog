@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PresençaLog</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <div>
+      <h1>PresençaLog</h1>
+      <p>Controle de escalas e presença</p>
+    </div>
+    <button id="logoutBtn" class="ghost hidden">Sair</button>
+  </header>
+
+  <main>
+    <section id="loginView" class="card login-card">
+      <h2>Acessar protótipo</h2>
+      <p class="muted">Use um ID Groot da planilha para consultar uma escala ou entre na visão de gestão.</p>
+      <label>ID Groot</label>
+      <input id="loginId" inputmode="numeric" placeholder="Ex.: 2456202">
+      <label>Senha</label>
+      <input id="loginPassword" type="password" placeholder="No protótipo, use qualquer senha">
+      <button id="employeeLoginBtn" class="primary">Entrar como colaborador</button>
+      <button id="managerLoginBtn" class="secondary">Abrir painel do gestor</button>
+      <p id="loginError" class="error"></p>
+      <small>Protótipo local: ainda não possui autenticação real nem banco de dados online.</small>
+    </section>
+
+    <section id="employeeView" class="hidden">
+      <div class="card hero">
+        <div>
+          <span class="eyebrow">Minha escala</span>
+          <h2 id="employeeName"></h2>
+          <p id="employeeMeta"></p>
+        </div>
+        <div id="todayBadge" class="status-badge"></div>
+      </div>
+      <div class="kpi-grid">
+        <article class="card"><span>Hoje</span><strong id="todayStatus"></strong></article>
+        <article class="card"><span>Horário</span><strong id="employeeTime"></strong></article>
+        <article class="card"><span>Escala</span><strong id="employeeScale"></strong></article>
+        <article class="card"><span>Próxima folga</span><strong id="nextOff"></strong></article>
+      </div>
+      <section class="card">
+        <div class="section-title">
+          <h3>Calendário</h3>
+          <span class="legend"><i class="work"></i> Trabalha <i class="off"></i> Folga</span>
+        </div>
+        <div id="employeeCalendar" class="calendar-grid"></div>
+      </section>
+    </section>
+
+    <section id="managerView" class="hidden">
+      <div class="toolbar card">
+        <div>
+          <label>Data</label>
+          <select id="dateFilter"></select>
+        </div>
+        <div>
+          <label>Turno</label>
+          <select id="shiftFilter"><option value="">Todos</option></select>
+        </div>
+        <div>
+          <label>Cargo</label>
+          <select id="roleFilter"><option value="">Todos</option></select>
+        </div>
+        <div class="search-wrap">
+          <label>Pesquisar</label>
+          <input id="searchFilter" placeholder="Nome ou ID Groot">
+        </div>
+      </div>
+
+      <div class="kpi-grid">
+        <article class="card"><span>Posições da escala</span><strong id="kpiTotal"></strong></article>
+        <article class="card"><span>Trabalhando</span><strong id="kpiWorking"></strong></article>
+        <article class="card"><span>Folga</span><strong id="kpiOff"></strong></article>
+        <article class="card warning"><span>Reposições</span><strong id="kpiReplacement"></strong></article>
+      </div>
+
+      <section class="card">
+        <div class="section-title">
+          <h3>Escalados no dia</h3>
+          <span id="resultCount" class="muted"></span>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Nome</th><th>ID Groot</th><th>Cargo</th><th>Turno</th><th>Escala</th><th>Horário</th><th>Status</th></tr></thead>
+            <tbody id="employeesTable"></tbody>
+          </table>
+        </div>
+      </section>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
